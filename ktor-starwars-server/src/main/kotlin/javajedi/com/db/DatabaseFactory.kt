@@ -8,6 +8,7 @@ import javajedi.com.model.StarWarsFilms
 import javajedi.com.model.UserRatings
 import javajedi.com.model.Users
 import kotlinx.coroutines.Dispatchers
+import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
@@ -23,6 +24,8 @@ object DatabaseFactory {
         val password = config.propertyOrNull("storage.password")?.getString() ?: "baggio"
         val hikari = createHikariDatasource(jdbcURL, driverClassName, username, password)
         val database = Database.connect(hikari)
+        val flyway = Flyway.configure().dataSource(hikari).load()
+        flyway.migrate()
         transaction(database) {
             SchemaUtils.drop(Customers, UserRatings, StarWarsFilms, Users)
             SchemaUtils.create(Customers, StarWarsFilms, Users, UserRatings)
