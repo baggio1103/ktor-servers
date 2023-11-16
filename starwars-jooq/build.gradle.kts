@@ -48,20 +48,17 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
 
-    // Database
+    // Flyway and Jooq Generator
     // https://mvnrepository.com/artifact/org.flywaydb/flyway-core
     implementation("org.flywaydb:flyway-core:9.16.3")
-
-
     jooqGenerator("org.postgresql:postgresql:42.6.0")
 
     // HCP
     implementation("com.zaxxer:HikariCP:5.1.0")
     runtimeOnly("org.postgresql:postgresql:42.6.0")
-    implementation("org.postgresql:r2dbc-postgresql:1.0.2.RELEASE")
+
     // Jooq and Kotlin coroutines
     implementation("org.jooq:jooq-kotlin:3.18.7")
-    implementation("org.jooq:jooq-kotlin-coroutines:3.18.7")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")
@@ -88,6 +85,7 @@ jooq {
                 generator.apply {
                     name = "org.jooq.codegen.DefaultGenerator"
                     database.apply {
+                        inputSchema = "public"
                         name = "org.jooq.meta.postgres.PostgresDatabase"
                         forcedTypes = listOf(
                             ForcedType().apply {
@@ -112,7 +110,6 @@ jooq {
                         packageName = "com.javajedi"
                         directory = "build/src/generated/jooq"
                     }
-//                    strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
                 }
             }
         }
