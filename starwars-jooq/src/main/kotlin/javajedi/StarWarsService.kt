@@ -1,9 +1,11 @@
 package javajedi
 
-import com.javajedi.Tables.STARWARSFILMS
+import com.javajedi.Tables.*
 import javajedi.DatabaseFactory.dbQuery
 import javajedi.DatabaseFactory.dsl
 import org.jooq.DSLContext
+import org.jooq.Records
+import org.jooq.impl.DSL.multiset
 
 class StarWarsService {
 
@@ -14,6 +16,22 @@ class StarWarsService {
             dslContext.selectFrom(STARWARSFILMS).map {
                 StarWarsFilm(it[STARWARSFILMS.SEQUEL_ID], it[STARWARSFILMS.NAME], it[STARWARSFILMS.DIRECTOR])
             }
+        }
+    }
+
+    suspend fun starWarsUserRatings(): List<StarWarsUserRatings> {
+        return dbQuery {
+            dslContext.select(
+                STARWARSFILMS.NAME,
+                STARWARSFILMS.DIRECTOR,
+                multiset(
+                    dslContext.select(USERS.NAME, USER_RATINGS.VALUE).from(
+                        USER_RATINGS.innerJoin(USERS).on(USER_RATINGS.USER_ID.eq(USERS.ID))
+                    ).where(USER_RATINGS.FILM_ID.eq(STARWARSFILMS.ID))
+                ).`as`("userRatings").convertFrom { row -> row.map { UserRating(it[USERS.NAME], it[USER_RATINGS.VALUE]) } }
+            )
+                .from(STARWARSFILMS)
+                .fetch(Records.mapping(::StarWarsUserRatings))
         }
     }
 

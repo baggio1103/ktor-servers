@@ -13,11 +13,11 @@ fun Route.starWarsRouting() {
         get {
             call.respondText("Hello World!")
         }
-    }
-
-    route("/star-wars") {
-        get {
+        get("/star-wars") {
             call.respond(starWarsService.starWarsFilms())
+        }
+        get("/star-wars-ratings") {
+            call.respond(starWarsService.starWarsUserRatings())
         }
     }
 
