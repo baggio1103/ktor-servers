@@ -62,6 +62,10 @@ dependencies {
     // Jooq and Kotlin coroutines
     implementation("org.jooq:jooq-kotlin:3.18.7")
 
+    // https://mvnrepository.com/artifact/org.mindrot/jbcrypt
+    // Hashing
+    implementation("org.mindrot:jbcrypt:0.4")
+
     //Authentication and Authorization
     implementation("io.ktor:ktor-server-auth:$ktor_version")
     implementation("io.ktor:ktor-server-auth-jwt:$ktor_version")
