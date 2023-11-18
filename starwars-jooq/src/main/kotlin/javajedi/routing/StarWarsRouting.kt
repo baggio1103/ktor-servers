@@ -1,9 +1,11 @@
 package javajedi.routing
 
 import io.ktor.server.application.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import javajedi.StarWarsService
+import javajedi.plugins.userPrincipal
 
 fun Route.starWarsRouting() {
 
@@ -14,6 +16,8 @@ fun Route.starWarsRouting() {
             call.respondText("Hello World!")
         }
         get("/star-wars") {
+            val user = call.userPrincipal<JWTPrincipal>()
+            println("User info: ${user.payload.claims}")
             call.respond(starWarsService.starWarsFilms())
         }
         get("/star-wars-ratings") {

@@ -1,4 +1,4 @@
-package javajedi
+package javajedi.data
 
 import kotlinx.serialization.Serializable
 

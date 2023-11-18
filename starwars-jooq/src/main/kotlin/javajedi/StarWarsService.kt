@@ -3,6 +3,9 @@ package javajedi
 import com.javajedi.Tables.*
 import javajedi.DatabaseFactory.dbQuery
 import javajedi.DatabaseFactory.dsl
+import javajedi.data.StarWarsFilm
+import javajedi.data.StarWarsUserRatings
+import javajedi.data.UserRating
 import org.jooq.DSLContext
 import org.jooq.Records
 import org.jooq.impl.DSL.multiset

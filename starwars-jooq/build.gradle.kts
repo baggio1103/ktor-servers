@@ -51,6 +51,8 @@ dependencies {
     // Flyway and Jooq Generator
     // https://mvnrepository.com/artifact/org.flywaydb/flyway-core
     implementation("org.flywaydb:flyway-core:9.16.3")
+    implementation("io.ktor:ktor-server-auth-jvm:2.3.6")
+    implementation("io.ktor:ktor-server-auth-jwt-jvm:2.3.6")
     jooqGenerator("org.postgresql:postgresql:42.6.0")
 
     // HCP
@@ -59,6 +61,10 @@ dependencies {
 
     // Jooq and Kotlin coroutines
     implementation("org.jooq:jooq-kotlin:3.18.7")
+
+    //Authentication and Authorization
+    implementation("io.ktor:ktor-server-auth:$ktor_version")
+    implementation("io.ktor:ktor-server-auth-jwt:$ktor_version")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")

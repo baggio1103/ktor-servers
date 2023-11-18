@@ -8,7 +8,8 @@ CREATE TABLE starwarsfilms
 
 CREATE TABLE users(
     id SERIAL PRIMARY KEY ,
-    name VARCHAR(50)
+    name VARCHAR(50),
+    password VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE user_ratings(
