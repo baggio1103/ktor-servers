@@ -1,4 +1,4 @@
-package javajedi
+package javajedi.service
 
 import com.javajedi.Tables.*
 import javajedi.DatabaseFactory.dbQuery

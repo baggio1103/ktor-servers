@@ -1,4 +1,4 @@
-package javajedi
+package javajedi.service
 
 import javajedi.DatabaseFactory.dsl
 
