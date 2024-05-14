@@ -3,10 +3,7 @@ package javajedi
 import io.ktor.server.application.*
 import io.ktor.server.netty.EngineMain
 import io.ktor.server.routing.IgnoreTrailingSlash
-import javajedi.plugins.configureMonitoring
-import javajedi.plugins.configureKoin
-import javajedi.plugins.configureRouting
-import javajedi.plugins.configureSerialization
+import javajedi.plugins.*
 
 fun main(args: Array<String>) {
     EngineMain.main(args)
@@ -15,6 +12,7 @@ fun main(args: Array<String>) {
 fun Application.module() {
     install(IgnoreTrailingSlash)
     configureKoin()
+    configureAuthentication()
     configureMonitoring()
     configureRouting()
     configureSerialization()

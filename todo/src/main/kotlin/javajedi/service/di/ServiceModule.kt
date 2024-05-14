@@ -1,5 +1,6 @@
 package javajedi.service.di
 
+import javajedi.auth.JWTokenService
 import javajedi.repository.Database
 import javajedi.repository.TodoRepository
 import javajedi.repository.UserRepository
@@ -19,4 +20,16 @@ val serviceModule = module {
 
 val userModule = module {
     single<UserService> { UserService(userRepository = get()) }
+}
+
+val jwtModule = { issuer: String, audience: String, secret: String ->
+    module {
+        factory {
+            JWTokenService(
+                issuer = issuer,
+                audience = audience,
+                secret = secret
+            )
+        }
+    }
 }

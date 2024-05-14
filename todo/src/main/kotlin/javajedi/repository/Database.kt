@@ -7,8 +7,8 @@ import javajedi.entity.User
 class Database {
 
     private val users = mutableListOf(
-    User(1, "Baggio", "baggio-password"),
-    User(2, "Kevin", "kevin-password")
+        User(1, "dave", "dave-password"),
+        User(2, "bruce", "dave-password")
     )
 
     fun users() = users
@@ -26,7 +26,7 @@ class Database {
             1,
             "Start Ktor Course",
             "About time I started Ktor Course",
-            "me",
+            "dave",
             "2024-09-01",
             "HIGH"
         ),
@@ -35,11 +35,10 @@ class Database {
             1,
             "Start Ktor Course",
             "Add routing chapter",
-            "me",
+            "bruce",
             "2024-09-01",
             "HIGH"
         ),
     )
-
 
 }
